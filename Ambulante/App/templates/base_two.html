@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" 
+        type="text/css"
+        href="{% static 'css/bootstrap.css' %}">
+        <!-- Custom fonts for this template-->
+        
+        <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+       
+    <title>Ambulante</title>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <img src="{% static 'images/cardiogram.png' %}" width="5%" height="5%">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'lista_korisnikovih_radilista' user.id %}">Home</a>
+        </li>
+        <li class="nav-item">
+            
+        </li>
+        <li class="nav-item">
+            
+        </li>
+        <li class="nav-item">
+        
+    </li>
+        <li class="nav-item">
+            
+        </li>
+        <li class="nav-item">
+            
+        </li>
+    </ul>
+    <span class="navbar-text">
+        {{user.first_name}}
+        {{user.last_name}}
+        </span>
+    <ul class="nav navbar-nav my-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Odjava </a>
+        </li>
+      </ul>
+    
+    </ul>
+    </div>
+</nav>
+<br><br>
+<body>
+    {% block lista_korisnikovih_radilista %}
+    {% endblock %}
+    {% block sestrinska_čekaonica %}
+    {% endblock %}
+    {% block lista_pretraženih_pacijenata %}
+    {% endblock %}
+    {% block utrošak_posjeta %}
+    {% endblock %}
+    {% block pretraži_pacijenta %}
+    {% endblock %}
+    {% block naplata %}
+    {% endblock %}
+    {% block posjeta %}
+    {% endblock %}
+</body>
+</html>
+
+<style>
+body {
+    background-color: 	#F5F5F5;
+}
+</style>

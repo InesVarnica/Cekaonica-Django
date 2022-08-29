@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block blagajna %}
+<div class="card">
+    {% for naplata in blagajna %}
+    <div class="list-group-item">
+        {{ naplata.posjeta.naziv_radilišta }}
+        {{ naplata.posjeta.pacijent.ime }}
+        {{ naplata.posjeta.pacijent.prezime }}
+        {{ naplata.cijena }}
+        <br>
+    </div>
+    {% endfor %}
+    <div class="list-group-item">
+        Ukupna zarada: {{ukupno}}
+    </div>
+</div>
+<style>
+    .card {
+        margin: auto; 
+        float: none; 
+        margin-left: 20%; 
+        margin-right: 20%; 
+        
+    }
+    .btn {
+
+        background-color: #276973;
+        color: white;
+        border-radius: 25px
+    }
+
+</style>
+{% endblock %}

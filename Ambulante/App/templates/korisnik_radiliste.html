@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% block korisnik_radiliste %}
+{% load static %}
+<div class="container">
+    <div class="main-body">
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card" >
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <br>
+                    <img src="{% static 'images/doctor.png' %}" alt="Admin" class="rounded-circle" width="150">
+                    <div class="mt-3">
+                        <br>
+                      <h4>{{zaposlenik.first_name}} {{zaposlenik.last_name}}</h4>
+                      <p class="text-secondary mb-9">{{zaposlenik.role}}</p>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Zaposlenik</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{zaposlenik.first_name}} {{zaposlenik.last_name}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Korisničko ime</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{zaposlenik.username}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{zaposlenik.email}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Uloga</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{zaposlenik.role}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Datum početka rada</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {{zaposlenik.date_joined}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a class="btn "  href="{% url 'ažuriraj_korisnika' zaposlenik.id %}">Ažuriraj</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row gutters-sm">
+                <div class="col-sm-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                        <div class="col-sm-6">
+                            <h6 class="mb-0">Neupisana radilišta</h6>
+                        </div>
+                        <br>
+                        {% for radilište in neupisana_radilišta %}
+                        <form  method="POST">
+                            {% csrf_token %}
+                            <div>
+                                <div class="col-sm-10 text-secondary">
+                                    {{radilište}}
+                                    <button class="btn  btn-sm float-right" type="submit" name="nedodani" value="{{radilište.id}}">Dodaj</button>
+                                </div>
+                            </div>
+                            <br><br>
+                        </form>
+                        {% endfor %} 
+                        <nav aria-label="...">
+                          <ul class="pagination">
+                              {% if neupisana_radilišta.has_previous %}
+                              <li class="page-item">
+                                  <a class="page-link text-reset" href="?page=1">Prva</a>
+                              </li>
+                              <li class="page-item">
+                                  <a class="page-link text-reset" href="?page={{neupisana_radilišta.previous_page_number}}">Prethodna</a>
+                              </li>
+                              {% endif %}
+                              {% if neupisana_radilišta.has_next %}
+                              <li class="page-item">
+                                  <a class="page-link text-reset" href="?page={{neupisana_radilišta.next_page_number}}">Sljedeća</a>
+                              </li>
+                              <li class="page-item">
+                                  <a class="page-link text-reset" href="?page={{neupisana_radilišta.paginator.num_pages}}">Zadnja</a>
+                              </li>
+                              {% endif %}
+                          </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                        <div class="col-sm-6">
+                            <h6 class="mb-0">Upisana radilišta</h6>
+                        </div>
+                        <br>
+                        {% for radilište in upisana_radilišta %}
+                        <form  method="POST">
+                            {% csrf_token %}
+                            <div>
+                                <div class="col-sm-12 text-secondary">
+                                    {{radilište.radilište}}
+                                    <button class="btn  btn-sm float-right" type="submit" name="dodana" value="{{radilište.radilište.id}}">Obriši</button>
+                                </div>
+                            </div>
+                            <br><br>
+                        </form>
+                        {% endfor %} 
+                        <nav aria-label="...">
+                          <ul class="pagination">
+                              {% if upisana_radilišta.has_previous %}
+                              <li class="page-item">
+                                  <a class="page-link text-reset" href="?page=1">Prva</a>
+                              </li>
+                              <li class="page-item">
+                                  <a class="page-link text-reset" href="?page={{upisana_radilišta.previous_page_number}}">Prethodna</a>
+                              </li>
+                              {% endif %}
+                              {% if upisana_radilišta.has_next %}
+                              <li class="page-item">
+                                  <a class="page-link text-reset" href="?page={{upisana_radilišta.next_page_number}}">Sljedeća</a>
+                              </li>
+                              <li class="page-item">
+                                  <a class="page-link text-reset" href="?page={{upisana_radilišta.paginator.num_pages}}">Zadnja</a>
+                              </li>
+                              {% endif %}
+                          </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+<style>
+
+.btn {
+
+    background-color: #276973;
+    color: white;
+    border-radius: 25px
+
+}
+.pagination{
+            margin-left:auto;
+             
+        }
+  
+</style>
+{% endblock %}

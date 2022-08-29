@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block unos_radilišta %}
+<div>
+    <div class="card" style="width:60%;">
+        <form method="post">
+            <div class="card-body">
+                <h4>Unos novih radilišta!</h4>
+                <br>
+                <div class="form-group">
+                    <div class="form-group">
+                        {% csrf_token %}
+                        <select name="klinika" class="form-control form-control-user" id="id_klinika">
+                            <option value="" selected="">---------</option>
+                            <option value="KIR">Kirurgija</option>
+                            <option value="PED">Pedijatrija</option>
+                            <option value="INT">Unutarnje bolesti</option>
+                            <option value="ORT">Otorinolaringologija</option>
+                            <option value="NRL">Neurologija</option>
+                            <option value="GIN">Ginekologija</option>
+                            <option value="PSI">Psihijatrija</option>
+                            <option value="KOZ">Kožne bolesti</option>
+                          </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-user" name="naziv"  placeholder="Naziv ambulante">
+                    </div>
+                </div>
+                <input type="submit" class="btn  btn-block" value="Unesi radilište">
+            </div>
+            <br>
+        </form>
+        {% for message in messages %}
+            <div class="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .card{
+        margin-left:20%;
+        margin-right:20%;
+        margin-bottom: 10%;
+    }
+    .btn {
+
+    background-color: #276973;
+    color: white;
+    border-radius: 25px
+    
+    }
+
+    h4{
+
+        margin: auto;
+        margin-top: 5%;
+        font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        text-align: center;
+    }
+
+    .form-control{
+
+        border-radius: 25px
+    }
+</style>
+{% endblock %}
+
+        
+      
+        

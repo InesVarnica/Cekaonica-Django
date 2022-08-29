@@ -1,0 +1,62 @@
+{% extends 'base_three.html' %}
+{% block otpust %}
+{% load crispy_forms_tags %}
+<div class="card" style="width:60%;">
+    <form method="post">
+        <div class="card-body">
+            <table>
+                <H4>Otpust</H4>
+                <h6>{{pacijent.ime}}
+                {{pacijent.prezime}} <br>
+                {{posjeta.naziv_radilišta}} <br>
+                Vrijeme dolaska: {{posjeta.datum}} <br>
+                Vrijeme odlaska: {{date}} <br> <br> </h6>
+                {{form|crispy}}
+                {% csrf_token %}
+            </table>
+            <input type="submit" class='btn btn-block' value="Otpusti">
+        </div>
+    </form>
+</div>
+
+<style>
+    .card{
+        margin-left:20%;
+        margin-right:20%;
+        margin-bottom: 10%;
+    }
+    .btn {
+
+    background-color: #276973;
+    color: white;
+    border-radius: 25px
+    
+    }
+
+    h4{
+
+        margin: auto;
+        margin-top: 2%;
+        text-align: center;
+        font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    
+    }
+    h6{
+
+        margin: auto;
+        margin-top: 2%;
+        text-align: center;
+        font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+
+        }
+
+    .form-control{
+
+        border-radius: 25px
+    }
+    .asteriskField {
+    display: none;
+    }
+</style>
+
+{% endblock %}

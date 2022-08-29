@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block ažuriraj_korisnika %}
+{% load crispy_forms_tags %}
+{% load static %}
+<div>
+    <div class="card" style="width: 50%;">
+        <h4>Ažuriraj korisnika!</h4>
+        <div class="card-body">
+            <div class="form-group">
+                <form method="post">
+                    {% csrf_token %}
+                    <form class="user">
+                        {{form|crispy}}
+                        <a href="{% url 'password' zaposlenik.id %}" class="btn btn-user btn-sm ">Promijeni lozinku</a>
+                        <br>
+                        <br>
+                        <input type="submit" class="btn btn-user btn-block" value="Ažuriraj korisnika">  
+                    </form>     
+                </form>
+            </div>
+            {% for message in messages %}
+                <div class="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .card{
+        margin-left:25%;
+        margin-right:25%;
+        margin-bottom: 10%;
+    }
+    .btn {
+
+    background-color: #276973;
+    color: white;
+    border-radius: 25px
+    
+    }
+
+    h4{
+
+        margin: auto;
+        margin-top: 10%;
+        font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    
+    }
+
+    .form-control{
+
+        border-radius: 25px
+    }
+    .form-text {
+    display: none;
+}
+
+
+</style>
+
+{% endblock %}

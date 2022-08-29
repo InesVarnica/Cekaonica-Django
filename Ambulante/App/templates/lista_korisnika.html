@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block lista_korisnika %}
+
+    <div class="botun">
+        <a href="{% url 'unos_korisnika' %}" class="btn btn-light " >Novi korisnik</a>
+        <form class=" form-inline float-right" method=POST action="{% url 'search_korisnik' %}">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Pretraži korisnika" aria-label="Search" name="searched">
+            <button class="btn btn-outline-secondary" type="submit">Pretraži</button>
+        </form>
+    </div>
+    
+    <br>
+    <div class="card" style="width:80%;">
+        <div class="table-wrap">
+            <table class="table table-striped">
+                <thead class="thead-primary">
+                    <tr>
+                        <th scope="col">Zaposlenik</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for korisnik in data %}
+                    <tr>
+                        <td><a href="{% url 'korisnik_radilište' korisnik.id  %}" class="text-reset">{{korisnik.first_name}} {{korisnik.last_name}}</a></td>     
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>  
+        </div>
+    </div>
+    <nav aria-label="...">
+        <ul class="pagination">
+            {% if data.has_previous %}
+            <li class="page-item">
+                <a class="page-link text-reset" href="?page=1">Prva</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link text-reset" href="?page={{data.previous_page_number}}">Prethodna</a>
+            </li>
+            {% endif %}
+            {% if data.has_next %}
+            <li class="page-item">
+                <a class="page-link text-reset" href="?page={{data.next_page_number}}">Sljedeća</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link text-reset" href="?page={{data.paginator.num_pages}}">Zadnja</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+<style>
+        .card{
+            margin-left:10%;
+            margin-right:10%;
+            margin-bottom: 4%;
+        }
+        .btn {
+    
+        background-color: #276973;
+        color: white;
+        border-radius: 25px
+        
+        }
+    
+        th{
+    
+            margin: auto;
+            margin-top: 10%;
+            font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        
+        }
+    
+        .form-control{
+    
+            border-radius: 25px
+        }
+
+        .botun{
+            margin-left:10%;
+            margin-right:10%;
+
+        }
+        .pagination{
+            margin-left:10%;
+            margin-right:10%;
+            
+        }
+
+      
+
+   
+</style>
+{% endblock %}
+
+
+
+
+

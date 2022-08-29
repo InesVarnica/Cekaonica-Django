@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block lista_radilista %}
+<div class="botun">
+    <a href="{% url 'unos_radilista' %}" class="btn btn-light ">Novo radilište</a>
+    <form class=" form-inline float-right" method=POST action="{% url 'search_radilište' %}">
+        {% csrf_token %}
+        <input class="form-control mr-sm-2" type="search" placeholder="Pretraži radilište" aria-label="Search" name="searched">
+        <button class="btn btn-outline-secondary" type="submit">Pretraži</button>
+    </form>
+</div>
+<br>
+<div class="card" style="width:80%;">
+    <div class="table-wrap">
+        <table class="table table-striped">
+            <thead class="thead-primary">
+                <tr>
+                    <th scope="col">Klinika</th>
+                    <th scope="col">Ambulanta</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for radilište in radilišta %}
+                <tr>
+                    <td>{{radilište.klinika}}</td>
+                    <td>{{radilište.naziv}}</td>       
+                </tr>
+                {% endfor %} 
+            </tbody>
+        </table>  
+    </div>
+</div>
+<nav aria-label="...">
+    <ul class="pagination">
+        {% if radilišta.has_previous %}
+        <li class="page-item">
+            <a class="page-link text-reset" href="?page=1">Prva</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link text-reset" href="?page={{radilišta.previous_page_number}}">Prethodna</a>
+        </li>
+        {% endif %}
+        {% if radilišta.has_next %}
+        <li class="page-item">
+            <a class="page-link text-reset" href="?page={{radilišta.next_page_number}}">Sljedeća</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link text-reset" href="?page={{radilišta.paginator.num_pages}}">Zadnja</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+<style>
+
+        .card{
+            margin-left:10%;
+            margin-right:10%;
+            margin-bottom: 4%;
+        }
+        .btn {
+    
+        background-color: #276973;
+        color: white;
+        border-radius: 25px
+        
+        }
+    
+        th{
+    
+            margin: auto;
+            margin-top: 10%;
+            font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        
+        }
+    
+        .form-control{
+    
+            border-radius: 25px
+        }
+
+        .botun{
+            margin-left:10%;
+            margin-right:10%;
+
+        }
+        
+        .pagination{
+            margin-left:10%;
+            margin-right:10%;
+            
+        }
+
+</style>
+
+{% endblock %}

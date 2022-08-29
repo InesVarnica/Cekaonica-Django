@@ -1,0 +1,65 @@
+{% extends 'base_two.html' %}
+{% block naplata %}
+<div class="card">
+    {% if naplata != None %}
+        <form method="post">
+            {% for u in utrošak %}
+            <div class="list-group-item">
+                {{u.utrošak}}
+                {{u.količina_utroška}}
+                {{u.utrošak.cijena}}
+                {% csrf_token %}
+                <br>
+            </div>
+            {% endfor %}
+            <div class="list-group-item">
+                Ukupno za platiti: {{ukupno}}
+            </div>
+                <button class="btn  btn-sm" type="submit" name="storno" value="{{ukupno}}">Storno</button>
+        </form>
+    {% else %}
+        <form method="post">
+            {% for u in utrošak %}
+            <div class="list-group-item">
+                {{u.utrošak}}
+                {{u.količina_utroška}}
+                {{u.utrošak.cijena}}
+                {% csrf_token %}
+                <br>
+            </div>
+            {% endfor %}
+            <div class="list-group-item">
+                Ukupno za platiti: {{ukupno}}
+            </div>
+                <button class="btn  btn-sm" type="submit" name="naplata" value="{{ukupno}}">Naplata</button>
+        </form>
+    {% endif %}
+</div>
+<div class="one">
+    <a href="{% url 'sestrinska_čekaonica' radilište_id %}" class="btn btn-sm">Povratak</a>
+</div>
+<style>
+    .card {
+        margin: auto; 
+        float: none; 
+        margin-left: 20%; 
+        margin-right: 20%; 
+        
+    }
+    .btn {
+
+        background-color: #276973;
+        color: white;
+        border-radius: 25px;
+        margin-left: 2%; 
+        margin-top: 2%; 
+        margin-bottom: 2%;
+    }
+    .one {
+
+    margin-left:19.5%;
+    margin-bottom: 10%;
+    }
+
+</style>
+{% endblock %}

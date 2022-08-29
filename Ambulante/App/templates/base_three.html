@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" 
+        type="text/css"
+        href="{% static 'css/bootstrap.css' %}">
+        <!-- Custom fonts for this template-->
+        
+        <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+       
+    <title>Ambulante</title>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <img src="{% static 'images/cardiogram.png' %}" width="5%" height="5%">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'lista_korisnikovih_radilista' user.id %}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'nalaz' posjeta_id %}">Nalaz</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'arhiva' pacijent_id posjeta_id %}">Arhiva</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'otpust' posjeta_id %}">Otpust</a>
+        </li>
+        <li class="nav-item">
+            
+        </li>
+        <li class="nav-item">
+            
+        </li>
+    </ul>
+    <span class="navbar-text">
+        {{pacijent.ime}}
+        {{pacijent.prezime}}
+    </span>
+    <span class="navbar-text">
+        <h3>|</h3>
+    </span>
+    <span class="navbar-text">
+        {{user.first_name}}
+        {{user.last_name}}
+    </span>
+    <ul class="nav navbar-nav my-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Odjava </a>
+        </li>
+      </ul>
+    
+    
+    </ul>
+    </div>
+</nav>
+<br><br>
+<body>
+    {% block nalaz %}
+    {% endblock %}
+    {% block arhiva %}
+    {% endblock %}
+    {% block otpust %}
+    {% endblock %}
+</body>
+</html>
+
+<style>
+body {
+    background-color: 	#F5F5F5;
+}
+</style>

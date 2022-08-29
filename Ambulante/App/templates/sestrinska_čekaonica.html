@@ -1,0 +1,128 @@
+{% extends 'base_two.html' %}
+{% block sestrinska_čekaonica %}
+<div>
+    <div class="botun">
+        <a href="{% url 'pretraži_pacijenta' radilište.id %}" class="btn btn-light"  > Ubaci pacijenta</a>
+    </div>
+    <br>
+    <div class="card" style="width: 80%;">
+        <h4>Pacijenti koji nemaju nalaz</h4>
+        <br>
+        <table class="table table-striped">
+            <thead class="thead-primary">
+                <tr>
+                    <th scope="col">MBO</th>
+                    <th scope="col">Ime</th>
+                    <th scope="col">Prezime</th>
+                    <th scope="col">Vrijeme dolaska</th>
+                    <th scope="col"></th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for pacijent in pacijenti %}
+                {% if pacijent.datum.date == date %}
+                <tr>    
+                        <td><a href="{% url 'profil_pacijent' pacijent.pacijent.id  %}" class="text-reset">{{pacijent.pacijent.MBO}}</a></td>
+                        <td>{{pacijent.pacijent.ime}}</td>
+                        <td>{{pacijent.pacijent.prezime}}</td>
+                        <td>{{pacijent.datum}}</td>
+                        {% if user.role == 'ms' or user.role == 'vms' %} 
+                            <td><a href="{% url 'utrošak_posjeta' pacijent.id %}" class="btn btn-light btn-sm float-right" >  Posjeta</a>
+                                <form  method="POST">
+                                    {% csrf_token %}
+                                    <button class="btn  btn-sm float-right" type="submit" name="obrisi" value="{{pacijent.id}}">Obriši</button></td>
+                                </form>
+                        {% elif user.role == 'dr' or user.role == 'spec' %}
+                            <td><a href="{% url 'nalaz' pacijent.id %}" class="btn btn-light btn-sm float-right" >  Nalaz</a>
+                                <form  method="POST">
+                                    {% csrf_token %}
+                                    <button class="btn  btn-sm float-right" type="submit" name="obrisi" value="{{pacijent.id}}">Obriši</button></td>
+                                </form>
+                        {% endif %}
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+
+</div>
+<div>
+    <div class="card" style="width: 80%;">
+        <div class="table-wrap">
+            <h4>Pacijenti koji imaju nalaz</h4>
+            <br>
+            <table class="table table-striped">
+                <thead class="thead-primary">
+                    <tr>
+                        <th scope="col">MBO</th>
+                        <th scope="col">Ime</th>
+                        <th scope="col">Prezime</th>
+                        <th scope="col">Vrijeme dolaska</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for pacijent in nalazi %}
+                    {% if pacijent.posjeta.datum.date == date %}
+                    <tr>
+                            <td><a href="{% url 'profil_pacijent' pacijent.posjeta.pacijent.id  %}" class="text-reset">{{pacijent.posjeta.pacijent.MBO}}</a></td>
+                            <td>{{pacijent.posjeta.pacijent.ime}}</td>
+                            <td>{{pacijent.posjeta.pacijent.prezime}}</td>
+                            <td>{{pacijent.posjeta.datum}}</td>
+                            {% if user.role == 'ms' or user.role == 'vms' %} 
+                                <td><a href="{% url 'utrošak_posjeta' pacijent.posjeta.id %}" class="btn btn-light btn-sm float-right">Posjeta</a>
+                                    <form  method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn  btn-sm float-right" type="submit" name="obrisi" value="{{pacijent.posjeta.id}}">Obriši</button></td>
+                                    </form>
+                            {% elif user.role == 'dr' or user.role == 'spec' %}
+                                <td><a href="{% url 'nalaz' pacijent.posjeta.id %}" class="btn btn-light btn-sm float-right" >Nalaz</a>
+                                    <form  method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn  btn-sm float-right" type="submit" name="obrisi" value="{{pacijent.posjeta.id}}">Obriši</button></td>
+                                    </form>
+                            {% endif %}
+                    </tr>
+                    {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<style>
+    .card{
+        margin-left:10%;
+        margin-right:10%;
+        margin-bottom: 4%;
+    }
+    .btn {
+
+    background-color: #276973;
+    color: white;
+    border-radius: 25px
+    
+    }
+
+    h4{
+
+        margin: auto;
+        margin-top: 2%;
+        font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        text-align: center;
+    }
+
+    .form-control{
+
+        border-radius: 25px
+    }
+    .botun{
+            margin-left:10%;
+            margin-right:10%;
+
+        }
+    
+    
+    
+</style>
+{% endblock %}

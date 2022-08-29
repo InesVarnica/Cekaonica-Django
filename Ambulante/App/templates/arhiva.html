@@ -1,0 +1,62 @@
+{% extends 'base_three.html' %}
+{% block arhiva %}
+<div class="card" style="width:80%;">
+    <div class="table-wrap">
+        <table class="table table-striped">
+            <thead class="thead-primary">
+                <tr>
+                    <th scope="col">Naziv nalaza</th>
+                    <th scope="col">Ambulanta</th>
+                    <th scope="col">Datum nalaza</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for nalaz in nalazi %}
+            <tr>
+                <td><a href="{% url 'nalaz' nalaz.posjeta.id %}" class="text-reset">{{nalaz.naziv_nalaza}}</a></td>
+                <td>{{nalaz.posjeta.naziv_radilišta}}</td>
+                <td>{{nalaz.posjeta.datum}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<style>
+    .card{
+        margin-left:10%;
+        margin-right:10%;
+        margin-bottom: 10%;
+    }
+    .btn {
+
+    background-color: #276973;
+    color: white;
+    border-radius: 25px
+    
+    }
+
+    th{
+
+        margin: auto;
+        margin-top: 10%;
+        font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    
+    }
+
+    .form-control{
+
+        border-radius: 25px
+    }
+
+    .botun{
+        margin-left:10%;
+        margin-right:10%;
+
+    }
+
+  
+
+
+</style>
+{% endblock %}

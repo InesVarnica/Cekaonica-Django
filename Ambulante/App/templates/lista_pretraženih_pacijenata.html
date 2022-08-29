@@ -1,0 +1,122 @@
+{% extends 'base_two.html' %}
+{% block lista_pretraženih_pacijenata %}
+<div class="card">
+            {% for pacijent in korisnik1 %}
+            <div class="list-group-item">
+                {% if pacijent.MBO != None %}
+                    {{pacijent.MBO}}
+                {% endif %}
+                {{pacijent.ime}}
+                {{pacijent.prezime}}
+                {% if pacijent.datum_rođenja != None %}
+                    {{pacijent.datum_rođenja}}
+                {% endif %}
+                {% if not user.is_staff %}
+                    <a href="{% url 'posjeta' radilište pacijent.id %}" class="btn btn-light btn-sm " >  Ubaci u čekaonicu</a>
+                {% endif %}
+                <br><br>
+            </div>
+            {% endfor %}
+        {% for pacijent in korisnik2 %}
+        <div class="list-group-item">
+            {% if pacijent.MBO != None %}
+                {{pacijent.MBO}}
+            {% endif %}
+            
+            {{pacijent.ime}}
+            {{pacijent.prezime}}
+            {% if pacijent.datum_rođenja != None %}
+                {{pacijent.datum_rođenja}}
+            {% endif %}
+            {% if not user.is_staff %}
+            <a href="{% url 'posjeta' radilište pacijent.id %}" class="btn btn-light btn-sm " >  Ubaci u čekaonicu</a>
+            {% endif %}
+            <br><br>
+        </div>
+        {% endfor %}
+        {% for pacijent in korisnik3 %}
+        <div class="list-group-item">
+            {% if pacijent.MBO != None %}
+                {{pacijent.MBO}}
+            {% endif %}
+            {{pacijent.ime}}
+            {{pacijent.prezime}}
+            {% if pacijent.datum_rođenja != None %}
+                {{pacijent.datum_rođenja}}
+            {% endif %}
+            {% if not user.is_staff %}
+                <a href="{% url 'posjeta' radilište pacijent.id %}" class="btn btn-light btn-sm " >  Ubaci u čekaonicu</a>
+            {% endif %}
+            <br><br>
+        </div>
+        {% endfor %}
+        {% for pacijent in korisnik4 %}
+        <div class="list-group-item">
+            {% if pacijent.MBO != None %}
+                {{pacijent.MBO}}
+            {% endif %}
+            {{pacijent.ime}}
+            {{pacijent.prezime}}
+            {% if pacijent.datum_rođenja != None %}
+                {{pacijent.datum_rođenja}}
+            {% endif %}
+            {% if not user.is_staff %}
+                <a href="{% url 'posjeta' radilište pacijent.id %}" class="btn btn-light btn-sm " >  Ubaci u čekaonicu</a>
+            {% endif %}
+            <br><br>
+        </div>
+        {% endfor %}
+        {% for pacijent in korisnik5 %}
+        <div class="list-group-item">
+            {% if pacijent.MBO != None %}
+                {{pacijent.MBO}}
+            {% endif %}
+            {{pacijent.ime}}
+            {{pacijent.prezime}}
+            {% if pacijent.datum_rođenja != None %}
+                {{pacijent.datum_rođenja}}
+            {% endif %}
+            {% if not user.is_staff %}
+                <a href="{% url 'posjeta' radilište pacijent.id %}" class="btn btn-light btn-sm float-right" >  Ubaci u čekaonicu</a>
+            {% endif %}
+            <br><br>
+        </div>
+        {% endfor %}
+        {% for pacijent in korisnik6 %}
+        <div class="list-group-item">
+            {% if pacijent.MBO != None %}
+                {{pacijent.MBO}}
+            {% endif %}
+            {{pacijent.ime}}
+            {{pacijent.prezime}}
+            {% if pacijent.datum_rođenja != None %}
+                {{pacijent.datum_rođenja}}
+            {% endif %}
+            {% if not user.is_staff %}
+                <a href="{% url 'posjeta' radilište pacijent.id %}" class="btn  btn-sm float-right" > Ubaci u čekaonicu</a>
+            {% endif %}
+            <br><br>
+        </div>
+        {% endfor %}
+</div>
+<style>
+    .card {
+        float: none; 
+        margin-left: 10%; 
+        margin-right: 10%; 
+        
+    }
+    .btn {
+
+        background-color: #276973;
+        color: white;
+        border-radius: 25px
+        
+    }
+    .text{
+    
+        margin-top: -2.5%;
+    }
+    
+</style>
+{% endblock %}

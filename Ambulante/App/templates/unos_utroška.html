@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block unos_utroška %}
+<div>
+    <div class="card" style="width:60%;">
+        <form method="post">
+            <div class="card-body">
+                <h4>Unos utroška u registar!</h4>
+                <br>
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-user" name="šifra"  placeholder="Šifra utroška">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-user" name="naziv"  placeholder="Naziv utroška">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control form-control-user" name="cijena"  placeholder="Cijena">
+                    </div>
+                </div>
+                <input type="submit" class="btn  btn-block" value="Unesi utrošak">
+            </div>
+        </form>
+        {% for message in messages %}
+            <div class="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+    <style>
+        .card{
+            margin-left:20%;
+            margin-right:20%;
+            margin-bottom: 10%;
+        }
+        .btn {
+    
+        background-color: #276973;
+        color: white;
+        border-radius: 25px
+        
+        }
+    
+        h4{
+    
+            margin: auto;
+            margin-top: 5%;
+            font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+            text-align: center;
+        }
+    
+        .form-control{
+    
+            border-radius: 25px
+        }
+    </style>
+{% endblock %}

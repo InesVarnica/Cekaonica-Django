@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block unos_korisnika %}
+{% load crispy_forms_tags %}
+{% load static %}
+<div>
+    <div class="card" style="width: 50%;">
+        <h4>Unos korisnika!</h4>
+      
+        <div class="card-body">
+            <div class="form-group">
+                <form method="post">
+                    {% csrf_token %}
+                    <form class="user">
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="text" class="form-control form-control-user" name="first_name" placeholder="Ime">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-user" name="last_name"  placeholder="Prezime">
+                            </div>
+                            
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" name="username"  placeholder="Korisničko ime">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control form-control-user" name="email"  placeholder="Email adresa">
+                        </div>
+                        <div class="form-group">
+                                <select name="role" required="" class="form-control form-control-user" placeholder="Uloga">
+                                    <option value="" selected="">---------</option>
+                                    <option value="dr">liječnik</option>
+                                    <option value="spec">specijalist</option>
+                                    <option value="admin">administrator</option>
+                                    <option value="ms">medicinska sestra</option>
+                                    <option value="vms">viša medicinska sestra</option>
+                                </select>
+                        
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="password" class="form-control form-control-user" name="password1" placeholder="Password">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control form-control-user" name="password2" placeholder="Repeat Password">
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-user btn-block" value="Unesi korisnika">    
+                </form>
+            </div>
+            {% for message in messages %}
+                <div class="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .card{
+        margin-left:25%;
+        margin-right:25%;
+        margin-bottom: 10%;
+    }
+    .btn {
+
+    background-color: #276973;
+    color: white;
+    border-radius: 25px
+    
+    }
+
+    h4{
+
+        margin: auto;
+        margin-top: 10%;
+        font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    
+    }
+
+    .form-control{
+
+        border-radius: 25px
+    }
+</style>
+
+{% endblock %}

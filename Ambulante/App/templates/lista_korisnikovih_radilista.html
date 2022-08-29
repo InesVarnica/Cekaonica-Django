@@ -1,0 +1,59 @@
+{% extends 'base_two.html' %}
+{% block lista_korisnikovih_radilista %}
+{% load static %}
+<div>
+    <div class="card" style="width: 80%;">
+            <div class="table-wrap">
+                <table class="table table-striped">
+                    <thead class="thead-primary">
+                        <tr>
+                            <th scope="col">Ambulante</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for radilište in radilišta %}
+                            {% if user.role == 'ms' or 'vms' %}
+                                <tr><td><a href="{% url 'sestrinska_čekaonica' radilište.radilište.id %}" class="text-reset">{{radilište.radilište}}</a></td></tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>  
+            </div>
+    </div>
+</div>
+
+<style> 
+        .card{
+            margin-left:10%;
+            margin-right:10%;
+            margin-bottom: 10%;
+        }
+        .btn {
+    
+        background-color: #276973;
+        color: white;
+        border-radius: 25px
+        
+        }
+    
+        th{
+    
+            margin: auto;
+            margin-top: 10%;
+            font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        
+        }
+    
+        .form-control{
+    
+            border-radius: 25px
+        }
+
+        .botun{
+            margin-left:10%;
+            margin-right:10%;
+
+        }
+</style>
+
+{% endblock %}

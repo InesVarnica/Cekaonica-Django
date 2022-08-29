@@ -1,0 +1,95 @@
+{% extends 'base_two.html' %}
+{% block utrošak_posjeta %}
+{% load crispy_forms_tags %}
+
+    <div class="card" style="width:80%;">
+        <br>
+            <div class="card-body">
+                <H4>Dodaj utrošak</H4>
+                <form method="post">
+                    {{form|crispy}}
+                    {% csrf_token %}
+                    <input class="btn btn-sm" type="submit" value="Unesi">
+                </form>
+                <br>
+                {% for utrošak in utrošak_posjete %}
+                <form method="post">
+                        {{utrošak.utrošak}} 
+                        {{utrošak.količina_utroška}}
+                        {% csrf_token %}
+                        <button class="btn  btn-sm" type="submit" name="Delete" value="{{utrošak.utrošak.id}}">Obriši</button>
+                        <br>
+                </form>
+                {% endfor %}
+                <br>
+                {% if posjeta.pacijent.status_osiguranja  == 'NE' %}
+                    {% if utrošak_posjete %}
+                        <a class="btn  btn-sm"  href="{% url 'naplata' posjeta.id %}">Napravi naplatu</a><br>
+                    {% endif %}
+                {% endif %}
+                <br>
+                {% for message in messages %}
+                    <div class="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                
+            </div>   
+    </div>
+    <br>
+    <div class="one">
+        <a href="{% url 'sestrinska_čekaonica' radilište_id %}" class="btn btn-sm">Povratak</a>
+    </div>
+</div>
+<style>
+
+.card{
+    margin-left:10%;
+    margin-right:10%;
+    
+
+}
+.one {
+
+    margin-left:11.5%;
+    margin-bottom: 10%;
+}
+.btn {
+
+    background-color: #276973;
+    color: white;
+    border-radius: 25px
+
+}
+
+h4{
+
+    margin: auto;
+    text-align: center;
+    font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+
+}
+
+.numberinput{
+
+    border-radius: 25px
+}
+.select{
+
+border-radius: 25px
+}
+.requiredField
+{
+    font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+.asteriskField {
+    display: none;
+    }
+
+table{
+
+        border-radius: 25px
+    }
+                
+</style>
+{% endblock %}

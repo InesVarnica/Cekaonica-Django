@@ -1,0 +1,55 @@
+{% extends 'base_two.html' %}
+{% block posjeta %}
+{% load crispy_forms_tags %}
+<div>
+    <div class="card" style="width:60%;">
+        <br>
+            <div class="card-body">
+                <H4>Posjeta</H4>
+                <form method='POST' >
+                    <br>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type='submit' value='Dodaj' class='btn btn-block'>
+                </form>
+                <br>
+            </div>
+         
+    </div>
+</div>
+<style>
+.card{
+    margin-left:20%;
+    margin-right:20%;
+    margin-bottom: 10%;
+}
+.btn {
+
+background-color: #276973;
+color: white;
+border-radius: 25px
+
+}
+
+h4{
+
+    margin: auto;
+    text-align: center;
+    font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+
+}
+
+.select{
+
+    border-radius: 25px
+}
+.requiredField
+{
+    font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+.asteriskField {
+    display: none;
+    }
+                
+</style>
+{% endblock %}
